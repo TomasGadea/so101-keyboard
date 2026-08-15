@@ -4,6 +4,32 @@ ETH Zurich, Robot Learning Spring 2025. An SO-101 robot arm types on a
 physical US-layout keyboard using vision-based key detection and
 homography-based coordinate mapping.
 
+## Demo
+
+### Eval 1 — Press SPACE, ENTER, R, L
+
+https://github.com/user-attachments/assets/7aea9fed-bcfc-493d-acc7-3c914aa106e6
+
+### Eval 2 — Type a single letter
+
+https://github.com/user-attachments/assets/21a8ff59-6360-4383-b4b1-79db71869693
+
+### Eval 3 — Type a sentence
+
+https://github.com/user-attachments/assets/6c866784-714c-4f5a-aa79-8b279d136c8c
+
+### Eval 3 on an unknown keyboard
+
+The same pipeline runs on a keyboard that was not used for calibration.
+
+https://github.com/user-attachments/assets/e0e522c6-2f4e-4165-b81a-a006bc052514
+
+### Demo day
+
+https://github.com/user-attachments/assets/50f3d251-c173-46e4-9b9e-73ecfcdab8d4
+
+https://github.com/user-attachments/assets/cfce98c5-15f7-4a5c-9b88-726496722e7b
+
 ## Approach (all eval tasks)
 
 A camera mounted on the robot arm photographs the keyboard. Key positions are
