@@ -1,6 +1,6 @@
 # Robot Learning Project — Keyboard Typing (Group 4)
 
-ETH Zurich, Robot Learning Spring 2025. An SO-101 robot arm types on a
+ETH Zürich, Robot Learning Spring 2026. An SO-101 robot arm types on a
 physical US-layout keyboard using vision-based key detection and
 homography-based coordinate mapping.
 
