@@ -1,0 +1,39 @@
+{
+  "_plane_z_comment": "Height (m, world frame) of the workspace plane that the pixel->3D homography projects onto. Used as the Z coordinate of every detected key.",
+  "plane_z": 0.017,
+
+  "_image_resolution_comment": "[width, height] in pixels of the camera image the VLM key coordinates are expressed in. Used to scale the normalized (0-1000) VLM pixel coords back to real image pixels before applying the homography.",
+  "image_resolution": [640, 480],
+
+  "_finger_tip_pose_facing_down_comment": "4x4 homogeneous transform specifying the finger tip pose. The 3x3 rotation block forces the finger tip to always face directly downwards (gripper z-axis points along world -z). The translation column is overwritten per-target with (x, y, z), so its values here are placeholders.",
+  "finger_tip_pose_facing_down": [
+    [0, 1, 0, 0],
+    [1, 0, 0, 0],
+    [0, 0, -1, 0],
+    [0, 0, 0, 1]
+  ],
+
+  "_hover_comment": "Hover waypoints used around each key press. The robot moves to pre_press above the key, descends to the key, then retreats to post_press. Offsets are in meters in the world frame; y_mult is a multiplicative scale applied to the target's y coordinate (used to bias the approach/retreat to the side).",
+  "hover": {
+    "pre_press": {
+      "x_offset": 0.01,
+      "y_mult": 1.1,
+      "z_offset": 0.06
+    },
+    "post_press": {
+      "x_offset": 0.04,
+      "y_mult": 1.2,
+      "z_offset": 0.06
+    }
+  },
+
+  "_num_keypoints_comment": "Number of waypoints in the quintic-spline trajectory between two end-effector poses. Higher = smoother and slower motion; lower = faster but coarser. Applied to every pre-hover / press / post-hover segment.",
+  "num_keypoints": 140,
+
+  "_auto_stop_comment": "Early-termination of the descent-onto-key motion based on detecting that the finger tip has touched the keyboard (z-coordinate stops changing). enabled: turn the check on/off. z_diff_threshold: per-step |Δz| (m) below which a step counts as 'stalled'. consecutive_stalled_steps: how many consecutive stalled steps must occur to stop. start_fraction: fraction of the trajectory that must elapse before the check is allowed to trigger (0.5 = second half).",
+  "auto_stop": {
+    "enabled": false,
+    "pose_orientation_treshold": 0.021,
+    "start_fraction": 0.5
+  }
+}

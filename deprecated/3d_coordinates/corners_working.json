@@ -1,0 +1,10 @@
+{
+  "object": "keyboard",
+  "coordinates": {
+    "top_left": {"x": 158, "y": 267},
+    "top_right": {"x": 785, "y": 271},
+    "bottom_right": {"x": 794, "y": 643},
+    "bottom_left": {"x": 151, "y": 643}
+  },
+  "coordinate_system": "normalized_1000"
+}

@@ -1,0 +1,24 @@
+{
+  "quad_px": [
+    [
+      -2,
+      186
+    ],
+    [
+      639,
+      181
+    ],
+    [
+      640,
+      382
+    ],
+    [
+      0,
+      387
+    ]
+  ],
+  "confidence": 1.0,
+  "method": "provided",
+  "image_width": 640,
+  "image_height": 480
+}

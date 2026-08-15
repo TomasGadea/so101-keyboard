@@ -1,0 +1,27 @@
+{
+  "timestamp": "2026-05-06_15-54-54",
+  "follower_port": "/dev/ttyACM0",
+  "leader_port": "/dev/ttyACM1",
+  "urdf": "/mnt/c/Users/danil/Documents/Github/ethz-robot-learning-project/robot_learning_project/calibration/so101_new_calib.urdf",
+  "target_frame": "gripper_frame_link",
+  "camera": "/dev/video0",
+  "image_size": [
+    640,
+    480
+  ],
+  "features": [
+    "KEY_Q",
+    "KEY_P",
+    "KEY_A",
+    "KEY_L",
+    "KEY_Z",
+    "KEY_M",
+    "KEY_SPACE",
+    "KEY_ENTER",
+    "KEY_H"
+  ],
+  "num_points": 9,
+  "have_homography": true,
+  "have_press_config": true,
+  "mirror_bus_errors": 0
+}

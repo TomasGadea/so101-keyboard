@@ -1,0 +1,12 @@
+{
+  "description": "Press primitive configuration.",
+  "created_at": "2026-05-06_15-54-54",
+  "target_frame": "gripper_frame_link",
+  "keyboard_surface_z_m": 0.009195459511957424,
+  "measured_press_z_m": 0.0018381949785959417,
+  "hover_offset_m": 0.035,
+  "press_offset_m": -0.007357264533361482,
+  "dwell_s": 0.12,
+  "retract_offset_m": 0.035,
+  "notes": "press_pose_z = surface_z + press_offset_m; hover_pose_z = surface_z + hover_offset_m"
+}

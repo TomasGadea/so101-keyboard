@@ -1,0 +1,223 @@
+{
+  "description": "Image pixel -> base XY homography (keyboard features only).",
+  "created_at": "2026-05-06_15-53-42",
+  "target_frame_used_for_points": "gripper_frame_link",
+  "camera": "/dev/video0",
+  "image_width": 640,
+  "image_height": 480,
+  "H_image_to_base_xy": [
+    [
+      -6.205779962629093e-05,
+      0.0006317782756122672,
+      0.04788079437098008
+    ],
+    [
+      0.00046241379268834493,
+      -0.00010472359652403926,
+      -0.09461429212293232
+    ],
+    [
+      -0.0004011877191160144,
+      -4.4731157350982195e-05,
+      1.0
+    ]
+  ],
+  "mean_error_m": 0.0038535594940185547,
+  "max_error_m": 0.008005009032785892,
+  "num_points": 9,
+  "points": [
+    {
+      "name": "KEY_Q",
+      "description": "center of the Q key",
+      "pixel": [
+        514,
+        276
+      ],
+      "base_xy": [
+        0.23588093241363306,
+        0.14782969435792462
+      ],
+      "base_xyz": [
+        0.23588093241363306,
+        0.14782969435792462,
+        0.011845010830523237
+      ],
+      "raw_image": "calibration/calib_images/KEY_Q_raw_2026-05-06_15-50-04.png",
+      "clicked_image": "calibration/calib_images/KEY_Q_clicked_2026-05-06_15-50-20.png"
+    },
+    {
+      "name": "KEY_P",
+      "description": "center of the P key",
+      "pixel": [
+        243,
+        268
+      ],
+      "base_xy": [
+        0.22753885308135746,
+        -0.010874230216624035
+      ],
+      "base_xyz": [
+        0.22753885308135746,
+        -0.010874230216624035,
+        7.71313772797988e-05
+      ],
+      "raw_image": "calibration/calib_images/KEY_P_raw_2026-05-06_15-50-45.png",
+      "clicked_image": "calibration/calib_images/KEY_P_clicked_2026-05-06_15-50-59.png"
+    },
+    {
+      "name": "KEY_A",
+      "description": "center of the A key",
+      "pixel": [
+        503,
+        244
+      ],
+      "base_xy": [
+        0.21680566570588056,
+        0.14386857666847747
+      ],
+      "base_xyz": [
+        0.21680566570588056,
+        0.14386857666847747,
+        0.010021145671967976
+      ],
+      "raw_image": "calibration/calib_images/KEY_A_raw_2026-05-06_15-51-18.png",
+      "clicked_image": "calibration/calib_images/KEY_A_clicked_2026-05-06_15-51-21.png"
+    },
+    {
+      "name": "KEY_L",
+      "description": "center of the L key",
+      "pixel": [
+        258,
+        242
+      ],
+      "base_xy": [
+        0.20715330960704836,
+        -0.0007351461730769329
+      ],
+      "base_xyz": [
+        0.20715330960704836,
+        -0.0007351461730769329,
+        0.0046125484935862215
+      ],
+      "raw_image": "calibration/calib_images/KEY_L_raw_2026-05-06_15-51-32.png",
+      "clicked_image": "calibration/calib_images/KEY_L_clicked_2026-05-06_15-51-42.png"
+    },
+    {
+      "name": "KEY_Z",
+      "description": "center of the Z key",
+      "pixel": [
+        482,
+        219
+      ],
+      "base_xy": [
+        0.19634461425895525,
+        0.13068685881036277
+      ],
+      "base_xyz": [
+        0.19634461425895525,
+        0.13068685881036277,
+        0.009387725725074528
+      ],
+      "raw_image": "calibration/calib_images/KEY_Z_raw_2026-05-06_15-51-55.png",
+      "clicked_image": "calibration/calib_images/KEY_Z_clicked_2026-05-06_15-52-01.png"
+    },
+    {
+      "name": "KEY_M",
+      "description": "center of the M key",
+      "pixel": [
+        305,
+        211
+      ],
+      "base_xy": [
+        0.18854848417748568,
+        0.02483130547628599
+      ],
+      "base_xyz": [
+        0.18854848417748568,
+        0.02483130547628599,
+        0.004717081906996989
+      ],
+      "raw_image": "calibration/calib_images/KEY_M_raw_2026-05-06_15-52-09.png",
+      "clicked_image": "calibration/calib_images/KEY_M_clicked_2026-05-06_15-52-28.png"
+    },
+    {
+      "name": "KEY_SPACE",
+      "description": "center of the SPACE bar",
+      "pixel": [
+        339,
+        189
+      ],
+      "base_xy": [
+        0.17017828304008764,
+        0.052417233984455865
+      ],
+      "base_xyz": [
+        0.17017828304008764,
+        0.052417233984455865,
+        0.0038892204050259144
+      ],
+      "raw_image": "calibration/calib_images/KEY_SPACE_raw_2026-05-06_15-52-36.png",
+      "clicked_image": "calibration/calib_images/KEY_SPACE_clicked_2026-05-06_15-52-39.png"
+    },
+    {
+      "name": "KEY_ENTER",
+      "description": "center of the ENTER key",
+      "pixel": [
+        145,
+        260
+      ],
+      "base_xy": [
+        0.22273678554958495,
+        -0.0646502099877654
+      ],
+      "base_xyz": [
+        0.22273678554958495,
+        -0.0646502099877654,
+        -0.0012622450080379682
+      ],
+      "raw_image": "calibration/calib_images/KEY_ENTER_raw_2026-05-06_15-52-52.png",
+      "clicked_image": "calibration/calib_images/KEY_ENTER_clicked_2026-05-06_15-52-56.png"
+    },
+    {
+      "name": "KEY_H",
+      "description": "center of the H key",
+      "pixel": [
+        346,
+        228
+      ],
+      "base_xy": [
+        0.2080498326857879,
+        0.05078034985605946
+      ],
+      "base_xyz": [
+        0.2080498326857879,
+        0.05078034985605946,
+        0.0032921753967013884
+      ],
+      "raw_image": "calibration/calib_images/KEY_H_raw_2026-05-06_15-53-11.png",
+      "clicked_image": "calibration/calib_images/KEY_H_clicked_2026-05-06_15-53-29.png"
+    }
+  ],
+  "per_point_errors_m": {
+    "KEY_Q": 0.007905002683401108,
+    "KEY_P": 0.0009110770188271999,
+    "KEY_A": 0.0010782916797325015,
+    "KEY_L": 0.0014577116817235947,
+    "KEY_Z": 0.0015132525004446507,
+    "KEY_M": 0.0035921481903642416,
+    "KEY_SPACE": 0.0030137754511088133,
+    "KEY_ENTER": 0.007205766160041094,
+    "KEY_H": 0.008005009032785892
+  },
+  "inliers": {
+    "KEY_Q": false,
+    "KEY_P": true,
+    "KEY_A": true,
+    "KEY_L": true,
+    "KEY_Z": true,
+    "KEY_M": true,
+    "KEY_SPACE": true,
+    "KEY_ENTER": false,
+    "KEY_H": false
+  }
+}

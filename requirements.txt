@@ -1,0 +1,28 @@
+# Core robot / camera / homography / VLM / OCR pipeline
+google-genai==1.74.0
+lerobot[feetech]==0.5.1
+matplotlib==3.10.9
+numpy==2.2.6
+onnxruntime==1.26.0
+opencv-python==4.13.0.92
+pillow==12.2.0
+placo==0.9.16
+python-dotenv==1.2.2
+rapidocr==3.8.1
+scipy==1.17.1
+
+# Policy training / evaluation helpers
+datasets==4.8.5
+huggingface-hub==1.14.0
+torch==2.10.0
+
+# Low-level Feetech bus diagnostics
+feetech-servo-sdk==1.0.0
+pyserial==3.5
+
+# Optional scripts also import these, but they are not installed in the
+# currently working environment. Uncomment only if you need sim/SfM scripts.
+# mujoco
+# pycolmap
+# pyquaternion
+# zarr

@@ -1,0 +1,5 @@
+lerobot[feetech]
+datasets
+huggingface_hub
+torch
+python-dotenv
