@@ -228,3 +228,7 @@ a/
 b/
 
 keys.json
+
+# Documentation figures (checked in on purpose)
+!docs/figures/
+!docs/figures/*.png

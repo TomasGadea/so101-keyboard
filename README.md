@@ -30,25 +30,113 @@ https://github.com/user-attachments/assets/50f3d251-c173-46e4-9b9e-73ecfcdab8d4
 
 https://github.com/user-attachments/assets/cfce98c5-15f7-4a5c-9b88-726496722e7b
 
-## Approach (all eval tasks)
+## Framework
 
-A camera mounted on the robot arm photographs the keyboard. Key positions are
-detected in the image using either a Gemini VLM call or local OCR
-(RapidOCR). A planar homography, fitted from ~24 manually probed
-pixel-to-world correspondences, maps detected key pixels to 3D world
-coordinates. The robot then drives to each target key via IK-solved
-waypoints with the fingertip pointing straight down, executing a
-hover-descend-retreat motion for each key press.
+The system uses no trainable policy and no checkpoints. It is a
+calibrate-once, then detect-and-act pipeline. One planar homography carries
+the whole geometric burden: it converts a key seen in the camera image into
+a 3D point in the robot base frame.
 
-- **Eval 1** (SPACE, ENTER, R, L): Single image capture, one VLM/OCR call
-  for all 4 keys, conservative motion.
-- **Eval 2** (arbitrary single letter): Same pipeline, slightly tuned
-  descent height and smoother trajectories.
-- **Eval 3** (arbitrary sentence): Adds auto-stop contact detection
-  (monitors end-effector orientation convergence) with retry at a lower
-  descent height if contact is not detected.
+```mermaid
+flowchart LR
+    A["Capture<br/>one image"] --> B["Detect keys<br/>Gemini VLM or RapidOCR"]
+    B --> C["Pixel to base XY<br/>planar homography"]
+    C --> D["Press motion<br/>IK + hover-descend-retreat"]
+    E[("Calibration<br/>24 probed keys")] -.-> C
+    D --> F(["Key pressed"])
+```
 
-No trainable policy is used; no checkpoints are needed.
+### Hardware setup
+
+![Robot setup](docs/figures/01_setup.jpg)
+
+An SO-101 follower arm stands beside a US-layout keyboard that lies flat on
+the desk. The webcam is mounted on the arm, so the view depends on the arm
+pose. A rigid fingertip on the gripper presses the keys.
+
+### Step 0 — Calibration (done once)
+
+The operator drives the fingertip onto about two dozen physical keys. For
+each key the system records two things: the pixel where the key appears in
+the camera image, and the fingertip position in the robot base frame. This
+produces the pixel-to-world correspondences that the pipeline needs.
+
+Because the keyboard is flat, one planar homography `H` fits all of these
+pairs. The figure below shows the 24 correspondences that ship in
+[`new_approach_with_homography/calibration.json`](new_approach_with_homography/calibration.json).
+Panels 1 and 2 are the same keys seen in the two coordinate frames. Panel 3
+shows the fit residual.
+
+![Homography calibration](docs/figures/05_homography.png)
+
+The fit is accurate to **3.9 mm on average, 8.0 mm at worst**. A keycap is
+about 19 mm wide, so this error stays well inside one key.
+
+Calibration must be repeated if the camera moves or the keyboard is
+displaced. See [Calibration](#calibration) for the commands.
+
+### Step 1 — Capture
+
+![Camera capture](docs/figures/02_capture.jpg)
+
+The arm moves to a fixed viewing pose and takes a single frame. The whole
+keyboard must be visible. The pipeline takes one image per run, not a video
+stream.
+
+### Step 2 — Key detection
+
+The image goes to a key locator, which returns the image position of every
+requested letter. Two locators are interchangeable:
+
+| Locator | Notes |
+|---------|-------|
+| Gemini VLM | Needs `GEMINI_API_KEY` and a network call. More robust to glare and to unknown keyboard layouts. |
+| RapidOCR | Runs locally, no API key, faster. Weaker on low-contrast keycaps. |
+
+Both return normalized coordinates on a 0–1000 grid. The pipeline scales
+them back to real pixels using the `image_resolution` field of the task
+config. Each run writes an overlay image so the detection can be checked by
+eye. Detected key centers are red dots with a letter label:
+
+| Anchor keys (Q, A, Z, M, L, P) | Target letters of a sentence |
+|---|---|
+| ![Anchor keys](docs/figures/03_anchor_keys.png) | ![Target keys](docs/figures/04_target_keys.png) |
+
+### Step 3 — Pixel to 3D
+
+The homography `H` maps each detected pixel `(u, v)` to a point `(X, Y)` in
+the robot base frame. The third coordinate is not estimated. It is fixed to
+the `plane_z` constant of the task config, because every keycap lies on the
+same plane. Typical value: 0.0165–0.017 m.
+
+### Step 4 — Press motion
+
+For every target key the arm executes the same three-part primitive:
+
+1. **Hover** — move to a pose 0.06 m above the key, biased to the side so
+   the arm does not sweep across other keys.
+2. **Descend** — lower straight onto the keycap.
+3. **Retreat** — lift back to the hover height and continue to the next key.
+
+Inverse kinematics solves each pose with the fingertip forced to point
+straight down. Segments are quintic splines of 115–150 waypoints, so the
+motion stays smooth and the arm does not overshoot.
+
+### What changes between the eval tasks
+
+All three tasks run the same four steps. Only the config differs:
+
+| | Eval 1 (SPACE, ENTER, R, L) | Eval 2 (single letter) | Eval 3 (sentence) |
+|---|---|---|---|
+| `plane_z` | 0.017 m | 0.0165 m | 0.0165 m |
+| Waypoints per segment | 140 | 150 | 115 |
+| Contact auto-stop | off | off | **on** |
+
+Auto-stop is the one behavioral difference. In Eval 3 the descent is cut
+short as soon as the end-effector orientation stops changing, which means
+the fingertip has met the keycap. If no contact is detected, the press is
+retried at a lower descent height. This matters because a sentence needs
+many presses in a row, so a single missed key would corrupt the output.
 
 ## Prerequisites
 
@@ -188,5 +276,7 @@ To run all 26 letters with timing:
 ├── runtime/                       # Calibration support modules
 ├── scripts/                       # Calibration installation script
 ├── datasets/                      # Recorded teleoperation data
+├── docs/figures/                  # README figures
+├── videos/                        # Demo recordings
 └── deprecated/                    # Unused code from earlier approaches
 ```
